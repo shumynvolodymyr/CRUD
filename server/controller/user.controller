@@ -1,0 +1,53 @@
+const {passwordService} = require('../service');
+const {User} = require('../database');
+const {userNormalized: {userNormalizeHandler}} = require('../utils');
+const {responseStatusCodes, errorMessages} = require('../errors');
+
+module.exports = {
+    getUsers: async (req, res, next) => {
+        try {
+            const users = await User.find({});
+
+            res.json(users);
+        } catch (e) {
+            next(e);
+        }
+    },
+
+    postUser: async (req, res, next) => {
+        try {
+            const user = req.body;
+            const password = await passwordService.hash(user.password);
+            const newUser = await User.create({...user, password});
+            const normalizedUser = userNormalizeHandler(newUser.toJSON());
+
+            res.json(normalizedUser);
+        } catch (e) {
+            next(e);
+        }
+    },
+
+    deleteUser: async (req, res, next) => {
+        try {
+            const {userId} = req.params;
+
+            await User.deleteOne({_id: userId});
+
+            res.sendStatus(responseStatusCodes.OK);
+        } catch (e) {
+            next(e);
+        }
+    },
+
+    updateUser: async (req, res, next) => {
+        try {
+            const {userId} = req.params;
+
+            await User.updateOne({_id: userId}, {...req.body});
+
+            res.status(responseStatusCodes.CREATED).json(errorMessages.UPDATED);
+        } catch (e) {
+            next(e);
+        }
+    },
+};
