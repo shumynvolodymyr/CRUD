@@ -1,0 +1,19 @@
+.flex {
+    display: flex;
+}
+
+.users-box {
+    width: 60%;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid silver;
+    border-radius: 5px;
+}
+
+.create-user-box {
+width: 30%;
+    border: 1px solid silver;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+}
