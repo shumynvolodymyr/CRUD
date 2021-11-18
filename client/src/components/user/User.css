@@ -1,7 +1,12 @@
 .flex {
-    display: flex;
+    display: inline-flex;
     justify-content: flex-start;
     width: 100%;
+}
+
+.type-flex {
+    display: flex;
+    justify-content: space-between;
 }
 
 .user-info-box{
@@ -20,13 +25,12 @@
 .titles-box{
     width: 20%;
     margin: 5px;
+    border: none;
 }
 
 .item-delete {
     cursor: pointer;
-    font-size: 22px;
     color: red;
-    margin-right: 2px;
 }
 
 .item-delete:hover {color: darkred}

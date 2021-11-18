@@ -19,14 +19,15 @@ export default function User({user}) {
                         <p className={'titles-box'}>{value.first_name}</p>
                         <p className={'titles-box'}>{value.last_name}</p>
                         <p className={'titles-box'}>{value.email}</p>
-                        <p className={'titles-box'}>{value.user_type}</p>
-                        <div className="item-delete"
-                             onClick={async () => {
-                                 await deleteUser(value._id);
-                                 document.location.reload();
-                             }}>
-                            &#10008;
-                        </div>
+                        <p className={'titles-box type-flex'}>{value.user_type}
+                            <span className="item-delete"
+                                 onClick={async () => {
+                                     await deleteUser(value._id);
+                                     document.location.reload();
+                                 }}>
+                                &#10008;
+                            </span>
+                        </p>
                     </div>
                 )
             })}
